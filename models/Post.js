@@ -12,7 +12,7 @@ class Post extends Model {
           id: body.post_id
         },
         attributes: ['id', 'content', 'title', 'created_at',
-          [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)'), 'vote_count']
+          [sequelize.literal('(SELECT COUNT(*) FROM like WHERE post.id = like.post_id)'), 'like_count']
         ],
         include: [
           {
