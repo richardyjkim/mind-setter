@@ -26,7 +26,7 @@ app.use(session(sess));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 // app.use(express.static(path.join(__dirname, 'public')));
-app.user(routes);
+app.use(routes);
 
 // const helpers = require('./utils/helpers');
 // const hbs = exphbs.create({ helpers });

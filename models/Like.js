@@ -3,7 +3,7 @@ const sequelize = require('../config/connection');
 
 class Like extends Model { }
 
-Vote.init(
+Like.init(
   {
     id: {
       type: DataTypes.INTEGER,
