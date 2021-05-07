@@ -1,8 +1,8 @@
 const path = require('path');
 const express = require('express');
-// const session = require('express-session');
+const session = require('express-session');
 // const exphbs = require('express-handlebars');
-// const routes = require('./controller');
+const routes = require('./controller');
 
 const app = express();
 // we are going to change the port if we are deploying in heroku
@@ -10,23 +10,23 @@ const app = express();
 const PORT = process.env.PORT || 3001
 
 const sequelize = require("./config/connection");
-// const SequelizeStore = require('connect-session-sequelize')(session.Store);
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
-// const sess = {
-//   secret: 'Group ten project',
-//   cookie: { maxAge: 36000 },
-//   resave: false,
-//   saveUninitialized: true,
-//   store: new SequelizeStore({
-//     db: sequelize
-//   })
-// };
-
-// app.use(session(sess));
-// app.use(express.json());
-// app.use(express.urlencoded({ extended: false }));
+const sess = {
+  secret: 'Group ten project',
+  cookie: { maxAge: 36000 },
+  resave: false,
+  saveUninitialized: true,
+  store: new SequelizeStore({
+    db: sequelize
+  })
+};
+// unlock eveything by the time we have handlebars
+app.use(session(sess));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 // app.use(express.static(path.join(__dirname, 'public')));
-// app.user(routes);
+app.user(routes);
 
 // const helpers = require('./utils/helpers');
 // const hbs = exphbs.create({ helpers });
