@@ -1,13 +1,13 @@
 const router = require('express').Router();
 const sequelize = require('../../config/connection');
-const { Post, User, Comment, Like } = require('../../models');
+const { Post, User, Comment, Love } = require('../../models');
 
-// get all users
+// get all posts
 router.get('/', (req, res) => {
   console.log('======================');
   Post.findAll({
     attributes: ['id', 'content', 'title', 'created_at',
-      [sequelize.literal('(SELECT COUNT(*) FROM like WHERE post.id = like.post_id)'), 'like_count']
+      [sequelize.literal('(SELECT COUNT(*) FROM love AS love WHERE love .post_id = post.id)'), 'love_count']
     ],
     include: [
       {
@@ -37,7 +37,7 @@ router.get('/:id', (req, res) => {
       id: req.params.id
     },
     attributes: ['id', 'content', 'title', 'created_at',
-      [sequelize.literal('(SELECT COUNT(*) FROM like WHERE post.id = like.post_id)'), 'like_count']
+      [sequelize.literal('(SELECT COUNT(*) FROM love AS love WHERE love .post_id = post.id)'), 'love_count']
     ],
     include: [
       {
@@ -82,11 +82,11 @@ router.post('/', (req, res) => {
   }
 });
 
-router.put('/uplike', (req, res) => {
+router.put('/uplove', (req, res) => {
   // custom static method created in models/Post.js
   if (req.session) {
-    Post.uplike({ ...req.body, user_id: req.session.user_id }, { Like, Comment, User })
-      .then(updatedLikeData => res.json(updatedLikeData))
+    Post.uplove({ ...req.body, user_id: req.session.user_id }, { Love, Comment, User })
+      .then(updatedLoveData => res.json(updatedLoveData))
       .catch(err => {
         console.log(err);
         res.status(500).json(err);
