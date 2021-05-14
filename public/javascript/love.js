@@ -21,4 +21,4 @@ async function loveClickHandler(event) {
   }
 }
 
-document.querySelector('.love-btn').addEventListener('click', loveClickHandler); 
+document.querySelector('.love-btn').addEventListener('click', loveClickHandler);

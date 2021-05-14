@@ -4,8 +4,6 @@ const { Post, User, Comment, Love } = require('../models');
 
 // get all posts for dashboard
 router.get('/', (req, res) => {
-  console.log(req.session);
-  console.log('======================');
   Post.findAll({
     where: {
       user_id: req.session.user_id
@@ -43,7 +41,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/edit/:id', (req, res) => {
-  Post.findByPk(req.params.id, {
+  Post.findOne(req.params.id, {
     attributes: [
       'id',
       'content',
@@ -67,20 +65,32 @@ router.get('/edit/:id', (req, res) => {
     ]
   })
     .then(dbPostData => {
-      if (dbPostData) {
-        const post = dbPostData.get({ plain: true });
-
-        res.render('edit-post', {
-          post,
-          loggedIn: true
+      if (!dbPostData) {
+        res.status(404).json({
+          message: 'No post found with this id'
         });
-      } else {
-        res.status(404).end();
+        return;
       }
+
+      const post = dbPostData.get({
+        plain: true
+      });
+
+      res.render('edit-post', {
+        post,
+        loggedIn: true
+      });
     })
     .catch(err => {
+      console.log(err);
       res.status(500).json(err);
     });
-});
+})
+
+router.get('/new', (req, res) => {
+  res.render('new-post', {
+    loggedIn: true
+  })
+})
 
 module.exports = router;

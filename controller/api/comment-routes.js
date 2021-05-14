@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  // expects => {comment_text: "This is the comment", user_id: 1, post_id: 2}
+  // expects => {comment_text: "please response this is test", user_id: 1, post_id: 1}
   Comment.create({
     comment_text: req.body.comment_text,
     user_id: req.session.user_id,

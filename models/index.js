@@ -9,59 +9,52 @@ User.hasMany(Post, {
   foreignKey: 'user_id'
 });
 
-Post.belongsTo(User, {
-  foreignKey: 'user_id',
-  onDelete: 'SET NULL'
-});
-
-User.belongsToMany(Post, {
-  through: Love,
-  as: 'loved_posts',
-  foreignKey: 'user_id',
-  onDelete: 'SET NULL'
-});
-
-Post.belongsToMany(User, {
-  through: Love,
-  as: 'loved_posts',
-  foreignKey: 'post_id',
-  onDelete: 'SET NULL'
-});
-
-Love.belongsTo(User, {
-  foreignKey: 'user_id',
-  onDelete: 'SET NULL'
-});
-
-Love.belongsTo(Post, {
-  foreignKey: 'post_id',
-  onDelete: 'SET NULL'
+User.hasMany(Comment, {
+  foreignKey: 'user_id'
 });
 
 User.hasMany(Love, {
   foreignKey: 'user_id'
 });
 
+User.belongsToMany(Post, {
+  through: Love,
+  as: 'loved_posts',
+  foreignKey: 'user_id'
+});
+
+Post.belongsTo(User, {
+  foreignKey: 'user_id'
+});
+
+Post.hasMany(Comment, {
+  foreignKey: 'post_id'
+});
+
 Post.hasMany(Love, {
   foreignKey: 'post_id'
 });
 
+
+Post.belongsToMany(User, {
+  through: Love,
+  as: 'loved_posts',
+  foreignKey: 'post_id',
+});
+
 Comment.belongsTo(User, {
-  foreignKey: 'user_id',
-  onDelete: 'SET NULL'
+  foreignKey: 'user_id'
 });
 
 Comment.belongsTo(Post, {
-  foreignKey: 'post_id',
-  onDelete: 'SET NULL'
+  foreignKey: 'post_id'
 });
 
-User.hasMany(Comment, {
+Love.belongsTo(User, {
   foreignKey: 'user_id',
-  onDelete: 'SET NULL'
 });
 
-Post.hasMany(Comment, {
+Love.belongsTo(Post, {
   foreignKey: 'post_id'
 });
 
