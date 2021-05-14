@@ -10,12 +10,11 @@
     </div>
     <div>
       {{post.love_count}} {{format_plural "love(s) on this Thought" post.love_count}}
-      <br> at {{format_date created_at}}
       |
       <a href="/post/{{post.id}}">{{post.comments.length}} {{format_plural "comment" post.comments.length}}</a>
     </div>
-    <button type="submit">Rethink to Save</button>
-    <button type="button" class="delete-post-btn">Medidate to Delete</button>
+    <button type="submit">Rethink to Update</button>
+    <button type="button" class="delete-post-btn">Medidate to Flush</button>
   </form>
 </article>
 
