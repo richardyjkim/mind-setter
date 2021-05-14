@@ -1,7 +1,7 @@
 const path = require('path');
 const express = require('express');
 const session = require('express-session');
-// const exphbs = require('express-handlebars');
+const exphbs = require('express-handlebars');
 const routes = require('./controller');
 
 const app = express();
@@ -21,18 +21,18 @@ const sess = {
     db: sequelize
   })
 };
-// unlock eveything by the time we have handlebars
+
 app.use(session(sess));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-// app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(routes);
 
-// const helpers = require('./utils/helpers');
-// const hbs = exphbs.create({ helpers });
+const helpers = require('./utils/helpers');
+const hbs = exphbs.create({ helpers });
 
-// app.engine('handlebars', hbs.engine);
-// app.set('view engine', 'handlebars');
+app.engine('handlebars', hbs.engine);
+app.set('view engine', 'handlebars');
 
 sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => console.log(`App now listenin on port ${PORT}`))

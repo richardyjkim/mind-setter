@@ -1,5 +1,5 @@
 <section>
-  <h2>Create New Post</h2>
+  <h2>Somehting in your Mind?</h2>
 
   <form class="new-post-form">
     <div>
@@ -16,15 +16,14 @@
 
 {{#if posts.length}}
 <section>
-  <h2>Your Posts</h2>
+  <h2>Your Toughts</h2>
   <ol>
     {{#each posts as |post|}}
     <li>
       {{> post-info post}}
-      <a href="/dashboard/edit/{{post.id}}" class="edit-link">Edit post</a>
+      <a href="/dashboard/edit/{{post.id}}" class="edit-link">Nevermind</a>
     </li>
     {{/each}}
   </ol>
 </section>
 {{/if}}
-
