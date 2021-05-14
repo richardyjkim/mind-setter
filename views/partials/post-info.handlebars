@@ -2,7 +2,8 @@
   <div class="card-header">
     <h4>{{user.username}}: <a class="link" href="/post/{{id}}">{{title}}</a></h4>
     <p>Posted by {{user.username}} on {{format_date created_at}}
-      {{love_count}} {{format_plural "love" love_count}} by {{user.username}} on {{format_date created_at}}
+      {{love_count}} {{format_plural "love(s) this Thought" love_count}}
+      <br> Last loved at {{format_date created_at}}
       |
       <a href="/post/{{id}}">{{comments.length}} {{format_plural "comment" comments.length}}</a>
     </p>

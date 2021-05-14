@@ -1,10 +1,10 @@
 const router = require('express').Router();
 const sequelize = require('../../config/connection');
 const { Post, User, Comment, Love } = require('../../models');
+const withAuth = require('../../utils/auth');
 
 // get all posts
 router.get('/', (req, res) => {
-  console.log('======================');
   Post.findAll({
     attributes: ['id', 'content', 'title', 'created_at',
       [sequelize.literal('(SELECT COUNT(*) FROM love AS love WHERE love .post_id = post.id)'), 'love_count']
@@ -67,7 +67,7 @@ router.get('/:id', (req, res) => {
     });
 });
 
-router.post('/', (req, res) => {
+router.post('/', withAuth, (req, res) => {
   if (req.session) {
     Post.create({
       title: req.body.title,
