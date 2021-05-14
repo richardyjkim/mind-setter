@@ -1,9 +1,8 @@
 async function loveClickHandler(event) {
   event.preventDefault();
 
-  const id = window.location.toString().split('/')[
-    window.location.toString().split('/').length - 1
-  ];
+  let id = event.target.getAttribute("post_id");
+
   const response = await fetch('/api/posts/uplove', {
     method: 'PUT',
     body: JSON.stringify({
@@ -21,4 +20,6 @@ async function loveClickHandler(event) {
   }
 }
 
-document.querySelector('.love-btn').addEventListener('click', loveClickHandler);
+document.querySelectorAll('.love-btn').forEach(item => {
+  item.addEventListener('click', loveClickHandler)
+});
