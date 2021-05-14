@@ -9,6 +9,7 @@ router.get('/', (req, res) => {
     attributes: ['id', 'content', 'title', 'created_at',
       [sequelize.literal('(SELECT COUNT(*) FROM love AS love WHERE love .post_id = post.id)'), 'love_count']
     ],
+    order: [['created_at', 'DESC']],
     include: [
       {
         model: Comment,
@@ -68,18 +69,16 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', withAuth, (req, res) => {
-  if (req.session) {
-    Post.create({
-      title: req.body.title,
-      content: req.body.content,
-      user_id: req.session.user_id
-    })
-      .then(dbPostData => res.json(dbPostData))
-      .catch(err => {
-        console.log(err);
-        res.status(500).json(err);
-      });
-  }
+  Post.create({
+    title: req.body.title,
+    content: req.body.content,
+    user_id: req.session.user_id
+  })
+    .then(dbPostData => res.json(dbPostData))
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 });
 
 router.put('/uplove', (req, res) => {

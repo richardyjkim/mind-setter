@@ -81,19 +81,16 @@ router.post('/login', (req, res) => {
       username: req.body.username
     }
   }).then(dbUserData => {
-    console.log(dbUserData);
     if (!dbUserData) {
       res.status(400).json({ message: 'No user with that username!' });
       return;
     }
-    console.log('hello');
     const validPassword = dbUserData.checkPassword(req.body.password);
 
     if (!validPassword) {
       res.status(400).json({ message: 'Incorrect password!' });
       return;
     }
-    console.log('world');
     req.session.save(() => {
       req.session.user_id = dbUserData.id;
       req.session.username = dbUserData.username;
