@@ -15,8 +15,9 @@ async function loveClickHandler(event) {
 
   if (response.ok) {
     document.location.reload();
+    alert("I love it too")
   } else {
-    alert(response.statusText);
+    alert("You already loved this test");
   }
 }
 
