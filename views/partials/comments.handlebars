@@ -1,8 +1,8 @@
 <div class="comments">
   {{#each this}}
   <div class="card">
-    <h3 class="card-header"><i class="far fa-comments"> {{user.username}}</i></h3>
-    <p>{{format_date created_at}}</p>
+    <h3 class="card-header"><i class="far fa-comments comment"> {{user.username}}</i></h3>
+    <p> posted on: {{format_date created_at}}</p>
     <section class="comment card-body">
       <div class="text">
         "{{comment_text}}"
