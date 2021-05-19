@@ -1,6 +1,6 @@
 async function loveClickHandler(event) {
   event.preventDefault();
-
+  console.log("hello")
   let id = event.target.getAttribute("post_id");
 
   const response = await fetch('/api/posts/uplove', {
