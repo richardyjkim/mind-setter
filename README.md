@@ -24,6 +24,7 @@ Share your thoughts on your blog to get love and favor by commenting by others. 
 
 ## Usage 
 
+Welocome to MIND-SETTER
 
 ![alt text](./Assets/screenshot/ss1.png)
 
